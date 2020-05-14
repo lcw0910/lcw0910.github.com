@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>[MongoDB] 01.시작하기 | Develism</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="Database,NoSQL" />
+    
+    <meta name="description" content="이 장에서는 MongDB의 기본적인 사용법을 정리합니다.DB, Collection, Document의 생성 및 조회를 위한 기본 명령어를 소개합니다. DB 생성 &amp;amp; Collection 생성MongoDB는 RDB와 같은 별도의 DB생성 명령이 존재하지 않는다. (ex. CREATE DATABASE ;)USE 명령을 통해 사용할 DB를 선택하고 Coll">
+<meta name="keywords" content="Database,NoSQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[MongoDB] 01.시작하기">
+<meta property="og:url" content="http://blog.yicheolwon.xyz/2017/12/21/mongodb-tutorials-01/index.html">
+<meta property="og:site_name" content="Develism">
+<meta property="og:description" content="이 장에서는 MongDB의 기본적인 사용법을 정리합니다.DB, Collection, Document의 생성 및 조회를 위한 기본 명령어를 소개합니다. DB 생성 &amp;amp; Collection 생성MongoDB는 RDB와 같은 별도의 DB생성 명령이 존재하지 않는다. (ex. CREATE DATABASE ;)USE 명령을 통해 사용할 DB를 선택하고 Coll">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-05-14T13:44:29.630Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[MongoDB] 01.시작하기">
+<meta name="twitter:description" content="이 장에서는 MongDB의 기본적인 사용법을 정리합니다.DB, Collection, Document의 생성 및 조회를 위한 기본 명령어를 소개합니다. DB 생성 &amp;amp; Collection 생성MongoDB는 RDB와 같은 별도의 DB생성 명령이 존재하지 않는다. (ex. CREATE DATABASE ;)USE 명령을 통해 사용할 DB를 선택하고 Coll">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Database/">Database</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Database/NoSQL/">NoSQL</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Development/">Development</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Development/Front-End/">Front-End</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Development/Setting/">Setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Development/Utility/">Utility</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Diary/">Diary</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Movie/">Movie</a></li></ul>
+                                    
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Database/">Database</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Database/NoSQL/">NoSQL</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-mongodb-tutorials-01" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        [MongoDB] 01.시작하기
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2017/12/21/mongodb-tutorials-01/" class="article-date">
+            <time datetime="2017-12-21T04:16:30.000Z" itemprop="datePublished">2017-12-21</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Database/">Database</a>, <a class="tag-link" href="/tags/NoSQL/">NoSQL</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>이 장에서는 MongDB의 기본적인 사용법을 정리합니다.<br>DB, Collection, Document의 생성 및 조회를 위한 기본 명령어를 소개합니다.</p>
+<h3 id="DB-생성-amp-Collection-생성"><a href="#DB-생성-amp-Collection-생성" class="headerlink" title="DB 생성 &amp; Collection 생성"></a>DB 생성 &amp; Collection 생성</h3><p>MongoDB는 RDB와 같은 별도의 DB생성 명령이 존재하지 않는다. (ex. CREATE DATABASE ;)<br><code>USE</code> 명령을 통해 사용할 DB를 선택하고 Collection 을 생성하면 DB는 자동으로 생성된다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// DB생성</span></div><div class="line">use opera            <span class="comment">// 실행</span></div><div class="line">switched to db opera <span class="comment">// 결과</span></div><div class="line"></div><div class="line"><span class="comment">// Collection 생성</span></div><div class="line"><span class="comment">// ex) db.createCollection('DB명', [옵션]);</span></div><div class="line"></div><div class="line"><span class="comment">// 실행</span></div><div class="line">db.createCollection(<span class="string">'shops'</span>);</div><div class="line"><span class="comment">// 결과</span></div><div class="line">&#123; </div><div class="line">    <span class="string">"ok"</span> : <span class="number">1.0</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 데이터베이스 목록</span></div><div class="line">show dbs</div><div class="line"></div><div class="line">admin      <span class="number">0.000</span>GB</div><div class="line">config     <span class="number">0.000</span>GB</div><div class="line">homestead  <span class="number">0.000</span>GB</div><div class="line">local      <span class="number">0.000</span>GB</div><div class="line">opera      <span class="number">0.000</span>GB</div><div class="line">tests      <span class="number">0.000</span>GB</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 현재 선택된 DB 확인</span></div><div class="line">db</div><div class="line"></div><div class="line">opera</div><div class="line"></div><div class="line"><span class="comment">// Collection 목록 확인</span></div><div class="line">show collections</div><div class="line"></div><div class="line">shops</div><div class="line"></div></pre></td></tr></table></figure></p>
+<h3 id="Document-생성-amp-조회"><a href="#Document-생성-amp-조회" class="headerlink" title="Document 생성 &amp; 조회"></a>Document 생성 &amp; 조회</h3><p>Document 생성은 단일 Insert와 Bulk Insert 각각 다른 결과를 Return 한다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Insert Document</span></div><div class="line">db.shops.insert(&#123;</div><div class="line">  mall_id: <span class="string">"bpmt001"</span>,</div><div class="line">  shop_no: <span class="number">1</span>,</div><div class="line">  shop_name: <span class="string">"테스트몰(국문)"</span>,</div><div class="line">  locale: <span class="string">"ko_KR"</span>,</div><div class="line">  currency: <span class="string">"KRW"</span></div><div class="line">&#125;)</div><div class="line"></div><div class="line">WriteResult(&#123; <span class="string">"nInserted"</span> : <span class="number">1</span> &#125;) <span class="comment">// 결과</span></div><div class="line"></div><div class="line"><span class="comment">// Bulk Insert</span></div><div class="line">db.shops.insert([</div><div class="line">    &#123;</div><div class="line">        mall_id: <span class="string">"bpmt001"</span>,</div><div class="line">        shop_no: <span class="number">2</span>,</div><div class="line">        shop_name: <span class="string">"테스트몰(영문)"</span>,</div><div class="line">        locale: <span class="string">"en_US"</span>,</div><div class="line">        currency: <span class="string">"USD"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        mall_id: <span class="string">"bpmt001"</span>,</div><div class="line">        shop_no: <span class="number">3</span>,</div><div class="line">        shop_name: <span class="string">"테스트몰(일문)"</span>,</div><div class="line">        locale: <span class="string">"ja_JP"</span>,</div><div class="line">        currency: <span class="string">"JPY"</span></div><div class="line">    &#125;</div><div class="line">])</div><div class="line"></div><div class="line"><span class="comment">//결과</span></div><div class="line">BulkWriteResult(&#123;</div><div class="line">	<span class="string">"writeErrors"</span> : [ ],</div><div class="line">	<span class="string">"writeConcernErrors"</span> : [ ],</div><div class="line">	<span class="string">"nInserted"</span> : <span class="number">2</span>,</div><div class="line">	<span class="string">"nUpserted"</span> : <span class="number">0</span>,</div><div class="line">	<span class="string">"nMatched"</span> : <span class="number">0</span>,</div><div class="line">	<span class="string">"nModified"</span> : <span class="number">0</span>,</div><div class="line">	<span class="string">"nRemoved"</span> : <span class="number">0</span>,</div><div class="line">	<span class="string">"upserted"</span> : [ ]</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// 검색</span></div><div class="line">db.shops.find()</div><div class="line"></div><div class="line"><span class="comment">// 결과</span></div><div class="line">&#123; </div><div class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5a41f77b78cc2bf83d7b206e"</span>), </div><div class="line">    <span class="string">"mall_id"</span> : <span class="string">"bpmt001"</span>, </div><div class="line">    <span class="string">"shop_no"</span> : <span class="number">1.0</span>, </div><div class="line">    <span class="string">"shop_name"</span> : <span class="string">"테스트몰(국문)"</span>, </div><div class="line">    <span class="string">"locale"</span> : <span class="string">"ko_KR"</span>, </div><div class="line">    <span class="string">"currency"</span> : <span class="string">"KRW"</span></div><div class="line">&#125;</div><div class="line">&#123; </div><div class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5a41f7ea78cc2bf83d7b206f"</span>), </div><div class="line">    <span class="string">"mall_id"</span> : <span class="string">"bpmt001"</span>, </div><div class="line">    <span class="string">"shop_no"</span> : <span class="number">2.0</span>, </div><div class="line">    <span class="string">"shop_name"</span> : <span class="string">"테스트몰(영문)"</span>, </div><div class="line">    <span class="string">"locale"</span> : <span class="string">"en_US"</span>, </div><div class="line">    <span class="string">"currency"</span> : <span class="string">"USD"</span></div><div class="line">&#125;</div><div class="line">&#123; </div><div class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5a41f7ea78cc2bf83d7b2070"</span>), </div><div class="line">    <span class="string">"mall_id"</span> : <span class="string">"bpmt001"</span>, </div><div class="line">    <span class="string">"shop_no"</span> : <span class="number">3.0</span>, </div><div class="line">    <span class="string">"shop_name"</span> : <span class="string">"테스트몰(일문)"</span>, </div><div class="line">    <span class="string">"locale"</span> : <span class="string">"ja_JP"</span>, </div><div class="line">    <span class="string">"currency"</span> : <span class="string">"JPY"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 조건검색</span></div><div class="line">db.shops.find(&#123;<span class="attr">locale</span>: <span class="string">"ko_KR"</span>&#125;)</div><div class="line"><span class="comment">// 결과</span></div><div class="line">&#123; </div><div class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5a41f77b78cc2bf83d7b206e"</span>), </div><div class="line">    <span class="string">"mall_id"</span> : <span class="string">"bpmt001"</span>, </div><div class="line">    <span class="string">"shop_no"</span> : <span class="number">1.0</span>, </div><div class="line">    <span class="string">"shop_name"</span> : <span class="string">"테스트몰(국문)"</span>, </div><div class="line">    <span class="string">"locale"</span> : <span class="string">"ko_KR"</span>, </div><div class="line">    <span class="string">"currency"</span> : <span class="string">"KRW"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="Document-수정"><a href="#Document-수정" class="headerlink" title="Document 수정"></a>Document 수정</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Field Update : 특정 필드의 값만 없데이트 하기</span></div><div class="line"><span class="comment">// 특정필드의 값을 수정할땐 $set 연산자를 사용합니다. 이 연산자를 사용해서 새로운 Field를 추가할 수도 있습니다.</span></div><div class="line">db.shops.update(</div><div class="line">	&#123;<span class="attr">locale</span>: <span class="string">"ko_KR"</span>&#125;,</div><div class="line">	&#123;</div><div class="line">	  $set: &#123;</div><div class="line">	    shop_name: <span class="string">"테스트몰(국문) 2nd"</span></div><div class="line">	  &#125;</div><div class="line">	&#125;</div><div class="line">)</div><div class="line"><span class="comment">// 결과</span></div><div class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : <span class="number">1</span>, <span class="string">"nUpserted"</span> : <span class="number">0</span>, <span class="string">"nModified"</span> : <span class="number">1</span> &#125;)</div><div class="line"></div><div class="line"><span class="comment">// Replace Document : Object의 ID값은 변경되지 않고 문서를 Replace 하기.</span></div><div class="line">db.shops.update(</div><div class="line">	&#123;<span class="attr">locale</span>: <span class="string">"ko_KR"</span>&#125;,</div><div class="line">    &#123; </div><div class="line">        <span class="string">"mall_id"</span> : <span class="string">"bpmt001"</span>, </div><div class="line">        <span class="string">"shop_no"</span> : <span class="number">1.0</span>, </div><div class="line">        <span class="string">"shop_name"</span> : <span class="string">"테스트몰(국문) 2nd"</span>, </div><div class="line">        <span class="string">"locale"</span> : <span class="string">"ko_KR"</span>, </div><div class="line">        <span class="string">"currency"</span> : <span class="string">"KRW"</span></div><div class="line">    &#125;</div><div class="line">)</div><div class="line"><span class="comment">// 결과</span></div><div class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : <span class="number">1</span>, <span class="string">"nUpserted"</span> : <span class="number">0</span>, <span class="string">"nModified"</span> : <span class="number">1</span> &#125;)</div><div class="line"></div><div class="line"><span class="comment">// 특정필드를 제거하기</span></div><div class="line">db.shops.update(</div><div class="line">	&#123;<span class="attr">locale</span>: <span class="string">"ko_KR"</span>&#125;,</div><div class="line">    &#123; </div><div class="line">      $unset: &#123;<span class="string">"currency"</span>: <span class="number">1</span>&#125;</div><div class="line">    &#125;</div><div class="line">)</div><div class="line"><span class="comment">//결과</span></div><div class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : <span class="number">1</span>, <span class="string">"nUpserted"</span> : <span class="number">0</span>, <span class="string">"nModified"</span> : <span class="number">1</span> &#125;)</div><div class="line"></div><div class="line"><span class="comment">// criteria에 해당되는 document가 존재하지 않는다면 새로 추가하기</span></div><div class="line">db.shops.update(</div><div class="line">	&#123;<span class="attr">locale</span>: <span class="string">"zh_CN"</span>&#125;,</div><div class="line">    &#123; </div><div class="line">        mall_id: <span class="string">"bpmt001"</span>,</div><div class="line">        shop_no: <span class="number">4</span>,</div><div class="line">        shop_name: <span class="string">"테스트몰(중문)"</span>,</div><div class="line">        locale: <span class="string">"zh_CN"</span>,</div><div class="line">        currency: <span class="string">"CNY"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;<span class="attr">upsert</span>: <span class="literal">true</span>&#125;</div><div class="line">)</div><div class="line"><span class="comment">// 결과</span></div><div class="line">WriteResult(&#123;</div><div class="line">	<span class="string">"nMatched"</span> : <span class="number">0</span>,</div><div class="line">	<span class="string">"nUpserted"</span> : <span class="number">1</span>,</div><div class="line">	<span class="string">"nModified"</span> : <span class="number">0</span>,</div><div class="line">	<span class="string">"_id"</span> : ObjectId(<span class="string">"5a42006dc593ce3009ebeb1f"</span>)</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// Document 여러개 수정하기</span></div><div class="line"><span class="comment">// multi 옵션을 true로 설정해야 조건에 맞는 여러개의 Document가 수정된다.</span></div><div class="line">db.shops.update(</div><div class="line">	&#123;<span class="attr">mall_id</span>: <span class="string">"bpmt001"</span>&#125;,</div><div class="line">	&#123;<span class="attr">$set</span>: &#123;</div><div class="line">	  service: [<span class="string">"translation"</span>]</div><div class="line">	&#125;&#125;,</div><div class="line">	&#123;<span class="attr">upsert</span>: <span class="literal">true</span>, <span class="attr">multi</span>: <span class="literal">true</span>&#125;</div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment">// 배열에 값 추가하기 + 오름차순 정렬하기</span></div><div class="line">db.shops.update(</div><div class="line">	&#123;<span class="attr">mall_id</span>: <span class="string">"bpmt001"</span>&#125;,</div><div class="line">	&#123;<span class="attr">$push</span>: &#123;</div><div class="line">	  service: &#123;</div><div class="line">	    $each: [<span class="string">"etc"</span>, <span class="string">"special"</span>],</div><div class="line">	    $sort: <span class="number">1</span></div><div class="line">	  &#125;</div><div class="line">	&#125;&#125;,</div><div class="line">	&#123;<span class="attr">multi</span>: <span class="literal">true</span>&#125;</div><div class="line">)</div><div class="line"><span class="comment">// 결과</span></div><div class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : <span class="number">3</span>, <span class="string">"nUpserted"</span> : <span class="number">0</span>, <span class="string">"nModified"</span> : <span class="number">3</span> &#125;)</div><div class="line"><span class="comment">// $sort 값이 1인경우 ASC, -1 인경우 DESC</span></div><div class="line"></div><div class="line"><span class="comment">// 배열에서 값 제거하기</span></div><div class="line">db.shop.update(</div><div class="line">	&#123;<span class="attr">mall_id</span>: <span class="string">"bpmt001"</span>, <span class="attr">shop_no</span>: <span class="number">2</span>&#125;,</div><div class="line">	&#123;</div><div class="line">	  $pull: &#123;<span class="attr">service</span>: <span class="string">"etc"</span>&#125;</div><div class="line">	&#125;</div><div class="line">)</div><div class="line"><span class="comment">// 결과</span></div><div class="line">WriteResult(&#123; <span class="string">"nMatched"</span> : <span class="number">1</span>, <span class="string">"nUpserted"</span> : <span class="number">0</span>, <span class="string">"nModified"</span> : <span class="number">1</span> &#125;)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 배열에서 값 여러개 제거하기</span></div><div class="line">db.shops.update(</div><div class="line">    &#123;<span class="attr">mall_id</span>: <span class="string">"bpmt001"</span>, <span class="attr">shop_no</span>: <span class="number">2</span>&#125;,</div><div class="line">    &#123;</div><div class="line">        $pull: &#123;</div><div class="line">            service: &#123;</div><div class="line">                $<span class="keyword">in</span>: [<span class="string">"etc"</span>, <span class="string">"special"</span>]</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">)</div><div class="line"></div></pre></td></tr></table></figure>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://blog.yicheolwon.xyz/2017/12/21/mongodb-tutorials-01/" data-id="cka6usp1o000ij8tmvyv2qfm5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://www.facebook.com/cheolwonyi" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/lcw0910" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/12/27/mongodb-tools/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            MongoDB Database Management Tools
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2017/11/06/angular-in-memory-data/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">[Front-End]테스트 및 개발을 위한 mock server api 사용하기</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Database/NoSQL/">NoSQL</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Development/">Development</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Development/Front-End/">Front-End</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Development/Front-End/Angular/">Angular</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Development/Front-End/Etc/">Etc</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Development/Setting/">Setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Development/Utility/">Utility</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Diary/">Diary</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Movie/">Movie</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/Database/" style="font-size: 20px;">Database</a> <a href="/tags/NoSQL/" style="font-size: 20px;">NoSQL</a> <a href="/tags/Tool/" style="font-size: 10px;">Tool</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/blade-runner/" style="font-size: 10px;">blade runner</a> <a href="/tags/editor/" style="font-size: 10px;">editor</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/movie/" style="font-size: 10px;">movie</a> <a href="/tags/publish/" style="font-size: 10px;">publish</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/typescript/" style="font-size: 10px;">typescript</a> <a href="/tags/개발환경-세팅/" style="font-size: 10px;">개발환경 세팅</a> <a href="/tags/라이언-고슬링/" style="font-size: 10px;">라이언 고슬링</a> <a href="/tags/에디터/" style="font-size: 10px;">에디터</a> <a href="/tags/플러그인/" style="font-size: 10px;">플러그인</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2020 Cheolwon Lee</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
